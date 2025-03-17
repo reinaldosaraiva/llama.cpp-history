@@ -46,6 +46,11 @@ python3 cli.py list-executions
    curl -X POST http://127.0.0.1:8080/completion -H 'Content-Type: application/json' -d @/root/benchmark_results/benchmark_prompt_payload.json | python llm-benchmark.py
    ```
 
+   Ou, se você já tiver um arquivo de saída:
+   ```bash
+   cat output.json | python llm-benchmark.py
+   ```
+
 2. Consulte o histórico:
    ```bash
    python3 cli.py list-executions
