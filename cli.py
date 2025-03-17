@@ -1,5 +1,5 @@
 import typer
-from sqlmodel import Session, create_engine
+from sqlmodel import Session, create_engine, select
 from models import BenchmarkExecution
 from datetime import datetime
 
@@ -24,9 +24,17 @@ def add_execution(parameters: str, performance_results: str, model_name: str, to
 @app.command()
 def list_executions():
     with Session(engine) as session:
-        executions = session.query(BenchmarkExecution).all()
+        executions = session.exec(select(BenchmarkExecution)).all()
         for execution in executions:
-            print(f"ID: {execution.id}, Model: {execution.model_name}, Timestamp: {execution.timestamp}")
+            print(f"ID: {execution.id}")
+            print(f"Model: {execution.model_name}")
+            print(f"Timestamp: {execution.timestamp}")
+            print(f"Parameters: {execution.parameters}")
+            print(f"Performance Results: {execution.performance_results}")
+            print(f"Tokens Predicted: {execution.tokens_predicted}")
+            print(f"Tokens Evaluated: {execution.tokens_evaluated}")
+            print(f"Generation Settings: {execution.generation_settings}")
+            print("-" * 40)
 
 if __name__ == "__main__":
     app()
