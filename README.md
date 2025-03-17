@@ -43,16 +43,7 @@ python3 cli.py list-executions
 
 1. Execute um benchmark e capture a saída:
    ```bash
-   curl -X POST http://127.0.0.1:8080/completion \
-     -H 'Content-Type: application/json' \
-     -d @/root/benchmark_results/benchmark_prompt_payload.json | \
-     python3 cli.py add-execution \
-       --parameters "$(cat /root/benchmark_results/benchmark_prompt_payload.json)" \
-       --performance-results "$(jq -c . < output.json)" \
-       --model-name "model1" \
-       --tokens-predicted 100 \
-       --tokens-evaluated 50 \
-       --generation-settings '{"temperature": 0.8}'
+   curl -X POST http://127.0.0.1:8080/completion -H 'Content-Type: application/json' -d @/root/benchmark_results/benchmark_prompt_payload.json | python llm-benchmark.py
    ```
 
 2. Consulte o histórico:
