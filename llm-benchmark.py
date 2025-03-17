@@ -10,9 +10,9 @@ def process_benchmark_output(output):
     try:
         data = json.loads(output)
         execution = BenchmarkExecution(
-            parameters=json.dumps(data.get("parameters", {})),
-            performance_results=json.dumps(data.get("performance_results", {})),
-            model_name=data.get("model_name", "unknown"),
+            parameters=json.dumps({"content": data.get("content", "")}),
+            performance_results=json.dumps({"tokens_predicted": data.get("tokens_predicted", 0), "tokens_evaluated": data.get("tokens_evaluated", 0)}),
+            model_name=data.get("model", "unknown"),
             tokens_predicted=data.get("tokens_predicted", 0),
             tokens_evaluated=data.get("tokens_evaluated", 0),
             generation_settings=json.dumps(data.get("generation_settings", {}))
